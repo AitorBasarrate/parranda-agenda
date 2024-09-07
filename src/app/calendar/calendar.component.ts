@@ -23,8 +23,8 @@ const MATERIAL_COMPONENTS = [
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  weekDays = ['Al', 'Ar', 'Az', 'Og', 'Or', 'La', 'Ig'];
+  monthNames = ['Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina', 'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua'];
   currentMonth: number = 1;
   currentYear: number = 1;
   calendarDays: any[] = [];
