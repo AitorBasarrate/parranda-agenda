@@ -1,0 +1,23 @@
+<mat-card class="calendar">
+  <mat-card-header>
+    <button mat-icon-button (click)="prevMonth()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span>{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+    <button mat-icon-button (click)="nextMonth()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="weekdays">
+      <div *ngFor="let day of weekDays">{{ day }}</div>
+    </div>
+    <div class="days">
+      <div *ngFor="let day of calendarDays" 
+           [class.selected]="isSelected(day)" 
+           (click)="selectDay(day)">
+        {{ day.date }}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
