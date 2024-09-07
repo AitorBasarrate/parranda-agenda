@@ -8,11 +8,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
       "@envs/*": ["src/environments/*"],
-<<<<<<< Updated upstream
       "@components/*": ["src/app/*"],
-=======
-      "@components/*": ["src/app/components/*"],
->>>>>>> Stashed changes
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

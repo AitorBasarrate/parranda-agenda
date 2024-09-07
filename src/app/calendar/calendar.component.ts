@@ -4,31 +4,34 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-
-const MATERIAL_COMPONENTS = [
-  MatButtonModule,
-  MatIconModule,
-  MatCardModule,
-  MatGridListModule
-]
+import { ScheduleComponent } from '../schedule/schedule.component';
 
 @Component({
   standalone: true,
   selector: 'app-calendar',
   imports: [
     CommonModule,
-    MATERIAL_COMPONENTS
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatGridListModule,
+    ScheduleComponent
   ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  weekDays = ['Al', 'Ar', 'Az', 'Og', 'Or', 'La', 'Ig'];
-  monthNames = ['Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina', 'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua'];
+  weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   currentMonth: number = 1;
   currentYear: number = 1;
   calendarDays: any[] = [];
   selectedDate: Date | null = null;
+  activities: { [key: string]: string[] } = {
+    '2023-10-01': ['Activity 1', 'Activity 2'],
+    '2023-10-02': ['Activity 3', 'Activity 4'],
+    // Add more activities for different dates
+  };
 
   ngOnInit() {
     const today = new Date();
@@ -77,6 +80,14 @@ export class CalendarComponent implements OnInit {
     if (day.date) {
       this.selectedDate = new Date(this.currentYear, this.currentMonth, day.date);
     }
+  }
+
+  getActivitiesForSelectedDate(): string[] {
+    if (!this.selectedDate) {
+      return [];
+    }
+    const dateKey = this.selectedDate.toISOString().split('T')[0];
+    return this.activities[dateKey] || [];
   }
 
   isSelected(day: any): boolean {

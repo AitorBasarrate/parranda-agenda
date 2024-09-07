@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-schedule',
   standalone: true,
-  imports: [],
+  selector: 'app-schedule',
+  imports: [CommonModule],
   templateUrl: './schedule.component.html',
-  styleUrl: './schedule.component.scss'
+  styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent {
-
+  @Input() selectedDate: Date | null = null;
+  @Input() activities: string[] = [];
 }
