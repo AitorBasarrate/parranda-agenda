@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ScheduleComponent } from '@components/schedule/schedule.component';
 
 const MATERIAL_COMPONENTS = [
   MatButtonModule,
@@ -16,6 +17,7 @@ const MATERIAL_COMPONENTS = [
   standalone: true,
   selector: 'app-calendar',
   imports: [
+    ScheduleComponent,
     CommonModule,
     MATERIAL_COMPONENTS
   ],
@@ -28,7 +30,7 @@ export class CalendarComponent implements OnInit {
   currentMonth: number = 1;
   currentYear: number = 1;
   calendarDays: any[] = [];
-  selectedDate: Date | null = null;
+  selectedDate: Date | null = new Date(2024, 8, 14);
 
   ngOnInit() {
     const today = new Date();
