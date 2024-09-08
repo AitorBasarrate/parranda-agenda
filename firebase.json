@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/laudioko-jaiak",
+    "public": "dist/laudioko-jaiak/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
