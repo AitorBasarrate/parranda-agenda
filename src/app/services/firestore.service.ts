@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { collection, Firestore, getDocs, query } from '@angular/fire/firestore';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { collection, CollectionReference, Firestore, getDocs, query } from '@angular/fire/firestore';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +12,26 @@ export class FirestoreService {
     public firestore: Firestore
   ) { }
 
-  async getEvent(eventDay: Date) {
-    return (
-      await getDocs(query(collection(this.firestore, eventDay.toString())))
-    ).docs.map(event => event.data());
+  getEvent(eventDate: Date) {
+    const yearCollection = this.getYearCollection(eventDate);
+    const monthCollection = this.getMonthCollection(yearCollection, eventDate);
+    const dayCollection = this.getDayCollection(monthCollection, eventDate);
+    console.log(dayCollection);
+    // Creo que para pedir cosas anidadas hay que pedir con la "ruta" rollo: "2024/9/14"
+    // siendo cada numero el id de la colección
+    from(getDocs(query(dayCollection))
+    ).subscribe(dayEvents => console.log(dayEvents));
   }
 
-  getYear() {
-    // Get current year's collection
+  getYearCollection(eventDate: Date) {
+    return collection(this.firestore, eventDate.getFullYear().toString())
   }
 
-  getMonth() {
-    // Get current month's collection
+  getMonthCollection(yearCollection: CollectionReference, eventDate: Date) {
+    return collection(yearCollection, (eventDate.getMonth() + 1).toString())
   }
 
-  getDay() {
-    // Get current day's collection
+  getDayCollection(monthCollection: CollectionReference, eventDate: Date) {
+    return collection(monthCollection, eventDate.getDate().toString())
   }
 }

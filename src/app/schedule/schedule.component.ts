@@ -20,7 +20,7 @@ export class ScheduleComponent {
   ngOnInit() {
     console.log(this.selectedDate);
     if (this.selectedDate) {
-      this.firestoreService.getEvent(this.selectedDate!);
+      this.firestoreService.getEvent(this.selectedDate);
     }
   }
 }
