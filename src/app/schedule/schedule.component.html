@@ -1,8 +1,8 @@
 <div *ngIf="selectedDate">
-    <h2>Schedule for {{ selectedDate | date: 'fullDate' }}</h2>
-    <ul>
-      <li *ngFor="let activity of activities">{{ activity }}</li>
-    </ul>
+  <h2>{{ selectedDate | date: 'shortDate' }}-ko Ordutegia</h2>
+    <div *ngFor="let event of events">
+      {{ event.date | date: 'shortTime' }} - {{ event.activity }}
+    </div>
   </div>
   <div *ngIf="!selectedDate">
     <p>No date selected.</p>

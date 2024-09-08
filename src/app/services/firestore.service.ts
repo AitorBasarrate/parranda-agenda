@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
-import { collection, CollectionReference, Firestore, getDocs, query } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import { collection, collectionData, CollectionReference, Firestore, getDocs, query } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,29 +7,18 @@ import { from } from 'rxjs';
 export class FirestoreService {
 
   constructor(
-    public firestore: Firestore
+    private firestore: Firestore,
   ) { }
 
   getEvent(eventDate: Date) {
-    const yearCollection = this.getYearCollection(eventDate);
-    const monthCollection = this.getMonthCollection(yearCollection, eventDate);
-    const dayCollection = this.getDayCollection(monthCollection, eventDate);
-    console.log(dayCollection);
-    // Creo que para pedir cosas anidadas hay que pedir con la "ruta" rollo: "2024/9/14"
-    // siendo cada numero el id de la colección
-    from(getDocs(query(dayCollection))
-    ).subscribe(dayEvents => console.log(dayEvents));
+    const date = this.dateToString(eventDate)
+    return collectionData(collection(this.firestore, date))
   }
 
-  getYearCollection(eventDate: Date) {
-    return collection(this.firestore, eventDate.getFullYear().toString())
-  }
-
-  getMonthCollection(yearCollection: CollectionReference, eventDate: Date) {
-    return collection(yearCollection, (eventDate.getMonth() + 1).toString())
-  }
-
-  getDayCollection(monthCollection: CollectionReference, eventDate: Date) {
-    return collection(monthCollection, eventDate.getDate().toString())
+  dateToString(date: Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() < 10 ? (date.getMonth() + 1).toString().padStart(2, '0'): (date.getMonth() + 1).toString();
+    const day = date.getDate() < 10 ? date.getDate().toString().padStart(2, '0'): date.getDate().toString();
+    return `${year}/${month}/${day}`;
   }
 }
