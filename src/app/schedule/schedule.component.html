@@ -1,1 +1,9 @@
-<p>schedule works!</p>
+<div *ngIf="selectedDate">
+    <h2>Schedule for {{ selectedDate | date: 'fullDate' }}</h2>
+    <ul>
+      <li *ngFor="let activity of activities">{{ activity }}</li>
+    </ul>
+  </div>
+  <div *ngIf="!selectedDate">
+    <p>No date selected.</p>
+  </div>

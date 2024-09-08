@@ -10,9 +10,21 @@ export class FirestoreService {
     public firestore: Firestore
   ) { }
 
-  async getEvent(eventDay: number) {
+  async getEvent(eventDay: Date) {
     return (
       await getDocs(query(collection(this.firestore, eventDay.toString())))
     ).docs.map(event => event.data());
+  }
+
+  getYear() {
+    // Get current year's collection
+  }
+
+  getMonth() {
+    // Get current month's collection
+  }
+
+  getDay() {
+    // Get current day's collection
   }
 }
