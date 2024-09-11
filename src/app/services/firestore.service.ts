@@ -17,8 +17,9 @@ export class FirestoreService {
 
   dateToString(date: Date) {
     const year = date.getFullYear();
-    const month = date.getMonth() < 10 ? (date.getMonth() + 1).toString().padStart(2, '0'): (date.getMonth() + 1).toString();
-    const day = date.getDate() < 10 ? date.getDate().toString().padStart(2, '0'): date.getDate().toString();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    console.log(`${year}/${month}/${day}`);
     return `${year}/${month}/${day}`;
   }
 }

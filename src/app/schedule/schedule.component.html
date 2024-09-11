@@ -10,10 +10,10 @@
         </mat-chip-listbox>
         <span class="event-activity"><b>{{ event.activity }}</b></span>
       </div>
-      <div class="event-description" *ngIf="!event.is_concert">
+      <div class="event-description" *ngIf="!event.is_multiple">
         <p>{{ event.description }}</p>
       </div>
-      <div class="event-description" *ngIf="event.is_concert">
+      <div class="event-description" *ngIf="event.is_multiple">
         <ul>
           <li *ngFor="let band of event.bands">{{ band }}</li>
         </ul>

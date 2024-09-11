@@ -38,8 +38,7 @@ export class ScheduleComponent implements OnChanges {
         this.events = events.map((event: any) => ({
           ...event,
           date: event.date.toDate(),
-        }));
-      console.dir(this.events);
+        })).sort((a: any, b: any) => a.date - b.date);
     });
   }
 }
