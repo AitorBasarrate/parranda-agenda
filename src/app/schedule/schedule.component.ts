@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Ekintza } from '@components/services/event.interface';
 import { FirestoreService } from '@components/services/firestore.service';
 
@@ -10,21 +10,27 @@ import { FirestoreService } from '@components/services/firestore.service';
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss']
 })
-export class ScheduleComponent {
-  @Input() selectedDate: Date | null = new Date(2024, 9, 14);
+export class ScheduleComponent implements OnChanges {
+  @Input() selectedDate: Date = new Date();
   events: Ekintza[] = [];
 
   constructor(
     private firestoreService: FirestoreService
   ) { }
 
-  ngOnInit() {
-    if (this.selectedDate) {
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
       this.firestoreService.getEvent(this.selectedDate).subscribe(
-        (dayEvents: any) => {
-        console.log({dayEvents})
-        this.events = dayEvents;
-      });;
-    }
+        (events: any) => {
+          console.log(events);
+          this.events = events;
+        });
+  }
+
+  ngOnInit() {
+    this.firestoreService.getEvent(this.selectedDate).subscribe(
+      (events: any) => {
+        console.log(events);
+        this.events = events;
+    });  
   }
 }

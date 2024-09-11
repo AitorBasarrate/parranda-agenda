@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
   currentMonth: number = 1;
   currentYear: number = 1;
   calendarDays: any[] = [];
-  selectedDate: Date | null = new Date(2024, 8, 14);
+  selectedDate: Date | null = new Date();
 
   ngOnInit() {
     const today = new Date();
