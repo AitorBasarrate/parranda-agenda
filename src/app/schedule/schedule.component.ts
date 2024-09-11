@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { Ekintza } from '@components/services/event.interface';
 import { FirestoreService } from '@components/services/firestore.service';
 
 @Component({
   standalone: true,
   selector: 'app-schedule',
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatChipsModule,
+  ],
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss']
 })
@@ -19,18 +25,21 @@ export class ScheduleComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-      this.firestoreService.getEvent(this.selectedDate).subscribe(
-        (events: any) => {
-          console.log(events);
-          this.events = events;
-        });
+    this.getEvents();
   }
 
   ngOnInit() {
+    this.getEvents();
+  }
+
+  getEvents() {
     this.firestoreService.getEvent(this.selectedDate).subscribe(
       (events: any) => {
-        console.log(events);
-        this.events = events;
-    });  
+        this.events = events.map((event: any) => ({
+          ...event,
+          date: event.date.toDate(),
+        }));
+      console.dir(this.events);
+    });
   }
 }

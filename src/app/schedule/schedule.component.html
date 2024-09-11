@@ -1,9 +1,26 @@
-<div *ngIf="selectedDate">
-  <h2>{{ selectedDate | date: 'shortDate' }}-ko Ordutegia</h2>
-    <div *ngFor="let event of events">
-      {{ event.date | date: 'shortTime' }} - {{ event.activity }}
+<mat-card appearance="outlined" *ngIf="selectedDate">
+  <mat-card-header>
+    <mat-card-title><b>{{ selectedDate | date: 'shortDate' }}-ko Ordutegia</b></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngFor="let event of events" class="event-item">
+      <div class="event-header">
+        <mat-chip-listbox>
+          <mat-chip color="primary" selected>{{ event.date | date: 'shortTime' }}</mat-chip>
+        </mat-chip-listbox>
+        <span class="event-activity"><b>{{ event.activity }}</b></span>
+      </div>
+      <div class="event-description" *ngIf="!event.is_concert">
+        <p>{{ event.description }}</p>
+      </div>
+      <div class="event-description" *ngIf="event.is_concert">
+        <ul>
+          <li *ngFor="let band of event.bands">{{ band }}</li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </mat-card-content>
+</mat-card>
   <div *ngIf="!selectedDate">
     <p>No date selected.</p>
   </div>
