@@ -5,12 +5,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ScheduleComponent } from '@components/schedule/schedule.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const MATERIAL_COMPONENTS = [
   MatButtonModule,
   MatIconModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatToolbarModule,
 ]
 
 @Component({
