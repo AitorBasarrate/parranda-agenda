@@ -1,12 +1,16 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { provideRouter } from "@angular/router";
 
-import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '@envs/environment.development';
+import { routes } from "./app.routes";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import {
+  getAnalytics,
+  provideAnalytics,
+  ScreenTrackingService,
+} from "@angular/fire/analytics";
+import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { environment } from "@envs/environment.development";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     ScreenTrackingService,
-    provideFirestore(() => getFirestore())
-  ]
+    provideFirestore(() => getFirestore()),
+  ],
 };

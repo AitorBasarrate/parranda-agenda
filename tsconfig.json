@@ -8,7 +8,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
       "@envs/*": ["src/environments/*"],
-      "@components/*": ["src/app/*"],
+      "@components/*": ["src/app/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

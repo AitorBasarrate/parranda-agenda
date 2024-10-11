@@ -1,18 +1,24 @@
-import { Injectable } from '@angular/core';
-import { collection, collectionData, CollectionReference, Firestore, getDocs, query } from '@angular/fire/firestore';
+import { Injectable } from "@angular/core";
+import {
+  collection,
+  collectionData,
+  CollectionReference,
+  Firestore,
+  getDocs,
+  query,
+} from "@angular/fire/firestore";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class FirestoreService {
-
   constructor(
     private firestore: Firestore,
-  ) { }
+  ) {}
 
   getEvent(eventDate: Date) {
-    const date = this.dateToString(eventDate)
-    return collectionData(collection(this.firestore, date))
+    const date = this.dateToString(eventDate);
+    return collectionData(collection(this.firestore, date));
   }
 
   dateToString(date: Date) {

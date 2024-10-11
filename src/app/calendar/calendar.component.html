@@ -6,7 +6,8 @@
     <button mat-icon-button (click)="prevMonth()">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <span>{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+    <span>{{ monthNames[currentMonth] }}
+      {{ currentYear }}</span>
     <button mat-icon-button (click)="nextMonth()">
       <mat-icon>chevron_right</mat-icon>
     </button>
@@ -16,9 +17,11 @@
       <div *ngFor="let day of weekDays">{{ day }}</div>
     </div>
     <div class="days">
-      <div *ngFor="let day of calendarDays" 
-           [class.selected]="isSelected(day)" 
-           (click)="selectDay(day)">
+      <div
+        *ngFor="let day of calendarDays"
+        [class.selected]="isSelected(day)"
+        (click)="selectDay(day)"
+      >
         {{ day.date }}
       </div>
     </div>

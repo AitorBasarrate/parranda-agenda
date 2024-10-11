@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { ScheduleComponent } from '@components/schedule/schedule.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { ScheduleComponent } from "@components/schedule/schedule.component";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 const MATERIAL_COMPONENTS = [
   MatButtonModule,
@@ -13,22 +13,35 @@ const MATERIAL_COMPONENTS = [
   MatCardModule,
   MatGridListModule,
   MatToolbarModule,
-]
+];
 
 @Component({
   standalone: true,
-  selector: 'app-calendar',
+  selector: "app-calendar",
   imports: [
     ScheduleComponent,
     CommonModule,
-    MATERIAL_COMPONENTS
+    MATERIAL_COMPONENTS,
   ],
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  templateUrl: "./calendar.component.html",
+  styleUrls: ["./calendar.component.scss"],
 })
 export class CalendarComponent implements OnInit {
-  weekDays = ['Al', 'Ar', 'Az', 'Og', 'Or', 'La', 'Ig'];
-  monthNames = ['Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina', 'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua'];
+  weekDays = ["Al", "Ar", "Az", "Og", "Or", "La", "Ig"];
+  monthNames = [
+    "Urtarrila",
+    "Otsaila",
+    "Martxoa",
+    "Apirila",
+    "Maiatza",
+    "Ekaina",
+    "Uztaila",
+    "Abuztua",
+    "Iraila",
+    "Urria",
+    "Azaroa",
+    "Abendua",
+  ];
   currentMonth: number = 1;
   currentYear: number = 1;
   calendarDays: any[] = [];
@@ -45,7 +58,9 @@ export class CalendarComponent implements OnInit {
     this.calendarDays = [];
     const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
     const lastDayOfMonth = new Date(this.currentYear, this.currentMonth + 1, 0);
-    const startDay = firstDayOfMonth.getDay() === 0 ? 6 : firstDayOfMonth.getDay() - 1;
+    const startDay = firstDayOfMonth.getDay() === 0
+      ? 6
+      : firstDayOfMonth.getDay() - 1;
     const endDay = lastDayOfMonth.getDate();
 
     for (let i = 0; i < startDay; i++) {
@@ -79,7 +94,11 @@ export class CalendarComponent implements OnInit {
 
   selectDay(day: any) {
     if (day.date) {
-      this.selectedDate = new Date(this.currentYear, this.currentMonth, day.date);
+      this.selectedDate = new Date(
+        this.currentYear,
+        this.currentMonth,
+        day.date,
+      );
     }
   }
 
@@ -88,7 +107,7 @@ export class CalendarComponent implements OnInit {
       return false;
     }
     return this.selectedDate.getDate() === day.date &&
-           this.selectedDate.getMonth() === this.currentMonth &&
-           this.selectedDate.getFullYear() === this.currentYear;
+      this.selectedDate.getMonth() === this.currentMonth &&
+      this.selectedDate.getFullYear() === this.currentYear;
   }
 }

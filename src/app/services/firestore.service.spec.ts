@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { FirestoreService } from './firestore.service';
+import { FirestoreService } from "./firestore.service";
 
-describe('FirestoreService', () => {
+describe("FirestoreService", () => {
   let service: FirestoreService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('FirestoreService', () => {
     service = TestBed.inject(FirestoreService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });
